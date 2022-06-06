@@ -73,10 +73,30 @@ namespace ZeikomiRetweetWordCloud.Models
 
             // 画像とテキストをツイート
             token.Statuses.Update(status => text, attachment_url => att_url, media_ids => upload_result.MediaId);
+        }
 
-            //ツイート
-            //token.Statuses.Update(status => text, attachment_url => "https://twitter.com/Zeikomi552/status/1532853363858997248");
-            //token.Statuses.Update(status => text, attachment_url => att_url);
+        /// <summary>
+        /// 画像なしリツイート
+        /// </summary>
+        /// <param name="username">ユーザー名(スクリーン名)</param>
+        /// <param name="tweetid">ツイートID</param>
+        /// <param name="text">投稿文字列</param>
+        public static void QuotedTweetNoMedia(string username, string tweetid, string text)
+        {
+            string attachment_url = string.Format(@"https://twitter.com/{0}/status/{1}", username, tweetid);
+            QuotedTweetNoMedia(attachment_url, text);
+        }
+        /// <summary>
+        /// 画像なしリツイート
+        /// </summary>
+        /// <param name="att_url">アタッチメントURL</param>
+        /// <param name="text">投稿文字列</param>
+        public static void QuotedTweetNoMedia(string att_url, string text)
+        {
+            var token = Createoken();
+
+            // 画像とテキストをツイート
+            token.Statuses.Update(status => text, attachment_url => att_url/*, media_ids => upload_result.MediaId*/);
         }
         #endregion
     }

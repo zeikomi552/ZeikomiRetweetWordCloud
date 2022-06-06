@@ -317,6 +317,7 @@ namespace ZeikomiRetweetWordCloud.ViewModes
                     }
                     catch
                     {
+                        QuotedTweetM.QuotedTweetNoMedia(item.username, item.id, "ごめんなさい。うまくワードクラウドを作成することができませんでした。\r\nキーワードを変えるかダブルクォートんで頂けると・・・。");
                         var chg_value = new target_tweetBase();
                         chg_value.Copy(item);
                         chg_value.wordcloud_status = -1;
