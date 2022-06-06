@@ -356,6 +356,10 @@ if __name__ == '__main__':
                 noun_list = plane_text.split(" ")
                 if len(noun_list) > 0:
                     keyword = noun_list[0]
+            
+            # それでも見つけられなければ
+            if len(keyword) <= 0:
+                keyword = "ゴメンナサイ"
 
             # デバッグ用にキーワードを保持する
             _search_key = keyword

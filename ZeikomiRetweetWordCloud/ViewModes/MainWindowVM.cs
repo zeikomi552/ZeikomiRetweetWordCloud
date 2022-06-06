@@ -305,8 +305,16 @@ namespace ZeikomiRetweetWordCloud.ViewModes
 
                     try
                     {
-                        // 引用ツイート
-                        QuotedTweetM.QuotedTweet(item.username, item.id, "ワードクラウドで作成しました。対象キーワード[" + search_key + "]", Path.Combine(work_dir, item.id + ".png"));
+                        if(search_key.Equals("ゴメンナサイ"))
+                        {
+                            // 引用ツイート
+                            QuotedTweetM.QuotedTweet(item.username, item.id, "ゴメンナサイ。うまく名詞を見つけられませんでした。\r\nキーワードを変えるかダブルクォートんで頂けると・・・", Path.Combine(work_dir, item.id + ".png"));
+                        }
+                        else
+                        {
+                            // 引用ツイート
+                            QuotedTweetM.QuotedTweet(item.username, item.id, "ワードクラウドで作成しました。対象キーワード[" + search_key + "]", Path.Combine(work_dir, item.id + ".png"));
+                        }
                         var chg_value = new target_tweetBase();
                         chg_value.Copy(item);
                         chg_value.wordcloud_status = 1;
@@ -317,7 +325,7 @@ namespace ZeikomiRetweetWordCloud.ViewModes
                     }
                     catch
                     {
-                        QuotedTweetM.QuotedTweetNoMedia(item.username, item.id, "ごめんなさい。うまくワードクラウドを作成することができませんでした。\r\nキーワードを変えるかダブルクォートんで頂けると・・・。");
+                        QuotedTweetM.QuotedTweetNoMedia(item.username, item.id, "ごめんなさい。何等かの理由で失敗したみたいです。\r\n調査データに使わせてもらいます。ありがとうございます。");
                         var chg_value = new target_tweetBase();
                         chg_value.Copy(item);
                         chg_value.wordcloud_status = -1;
