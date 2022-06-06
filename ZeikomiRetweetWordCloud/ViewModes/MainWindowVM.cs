@@ -258,8 +258,7 @@ namespace ZeikomiRetweetWordCloud.ViewModes
         {
             try
             {
-                //string since_id = GetMaxId();
-                string since_id = "0";
+                string since_id = GetMaxId();
                 WordCloudManagerM.Search(this.SearchKeyword, since_id);
             }
             catch (Exception ex)
