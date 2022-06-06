@@ -298,12 +298,6 @@
     <None Update="Common\font\ZenOldMincho-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Common\Python\exec_wordcloud.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Common\Python\gettweet.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Common\Python\gettweet2.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

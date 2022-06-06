@@ -175,6 +175,58 @@ namespace ZeikomiRetweetWordCloud.Models.SQLite
 		}
 		#endregion
 
+		#region フォント[font]プロパティ
+		/// <summary>
+		/// フォント[font]プロパティ用変数
+		/// </summary>
+		String? _font = string.Empty;
+		/// <summary>
+		/// フォント[font]プロパティ
+		/// </summary>
+		[Column("font")]
+		public String? font
+		{
+			get
+			{
+				return _font;
+			}
+			set
+			{
+				if (_font == null || !_font.Equals(value))
+				{
+					_font = value;
+					NotifyPropertyChanged("font");
+				}
+			}
+		}
+		#endregion
+
+		#region カラーマップ[colormap]プロパティ
+		/// <summary>
+		/// カラーマップ[colormap]プロパティ用変数
+		/// </summary>
+		String? _colormap = string.Empty;
+		/// <summary>
+		/// カラーマップ[colormap]プロパティ
+		/// </summary>
+		[Column("colormap")]
+		public String? colormap
+		{
+			get
+			{
+				return _colormap;
+			}
+			set
+			{
+				if (_colormap == null || !_colormap.Equals(value))
+				{
+					_colormap = value;
+					NotifyPropertyChanged("colormap");
+				}
+			}
+		}
+		#endregion
+
 
 		#endregion
 
@@ -220,6 +272,10 @@ namespace ZeikomiRetweetWordCloud.Models.SQLite
 
 			this.username = item.username;
 
+			this.font = item.font;
+
+			this.colormap = item.colormap;
+
 
 		}
 		#endregion
@@ -233,12 +289,22 @@ namespace ZeikomiRetweetWordCloud.Models.SQLite
 		{
 			using (var db = new SQLiteDataContext())
 			{
-				// Insert
-				db.Add<target_tweetBase>(item);
-
-				// コミット
+				Insert(db, item);
 				db.SaveChanges();
 			}
+		}
+		#endregion
+
+		#region Insert処理
+		/// <summary>
+		/// Insert処理
+		/// </summary>
+		/// <param name="db">SQLiteDataContext</param>
+		/// <param name="item">Insertする要素</param>
+		public static void Insert(SQLiteDataContext db, target_tweetBase item)
+		{
+			// Insert
+			db.Add<target_tweetBase>(item);
 		}
 		#endregion
 
@@ -252,13 +318,26 @@ namespace ZeikomiRetweetWordCloud.Models.SQLite
 		{
 			using (var db = new SQLiteDataContext())
 			{
-				var item = db.DbSet_target_tweet.SingleOrDefault(x => x.id.Equals(pk_item.id));
+				Update(db, pk_item, update_item);
+				db.SaveChanges();
+			}
+		}
+		#endregion
 
-				if (item != null)
-				{
-					item.Copy(update_item);
-					db.SaveChanges();
-				}
+		#region Update処理
+		/// <summary>
+		/// Update処理
+		/// </summary>
+		/// <param name="db">SQLiteDataContext</param>
+		/// <param name="pk_item">更新する主キー（主キーの値のみ入っていれば良い）</param>
+		/// <param name="update_item">テーブル更新後の状態</param>
+		public static void Update(SQLiteDataContext db, target_tweetBase pk_item, target_tweetBase update_item)
+		{
+			var item = db.DbSet_target_tweet.SingleOrDefault(x => x.id.Equals(pk_item.id));
+
+			if (item != null)
+			{
+				item.Copy(update_item);
 			}
 		}
 		#endregion
@@ -272,12 +351,24 @@ namespace ZeikomiRetweetWordCloud.Models.SQLite
 		{
 			using (var db = new SQLiteDataContext())
 			{
-				var item = db.DbSet_target_tweet.SingleOrDefault(x => x.id.Equals(pk_item.id));
-				if (item != null)
-				{
-					db.DbSet_target_tweet.Remove(item);
-					db.SaveChanges();
-				}
+				Delete(db, pk_item);
+				db.SaveChanges();
+			}
+		}
+		#endregion
+
+		#region Delete処理
+		/// <summary>
+		/// Delete処理
+		/// </summary>
+		/// <param name="db">SQLiteDataContext</param>
+		/// <param name="pk_item">削除する主キー（主キーの値のみ入っていれば良い）</param>
+		public static void Delete(SQLiteDataContext db, target_tweetBase pk_item)
+		{
+			var item = db.DbSet_target_tweet.SingleOrDefault(x => x.id.Equals(pk_item.id));
+			if (item != null)
+			{
+				db.DbSet_target_tweet.Remove(item);
 			}
 		}
 		#endregion
@@ -291,14 +382,26 @@ namespace ZeikomiRetweetWordCloud.Models.SQLite
 		{
 			using (var db = new SQLiteDataContext())
 			{
-				return db.DbSet_target_tweet.ToList<target_tweetBase>();
+				return Select(db);
 			}
+		}
+		#endregion
+
+		#region Select処理
+		/// <summary>
+		/// Select処理
+		/// </summary>
+		/// <param name="db">SQLiteDataContext</param>
+		/// <returns>全件取得</returns>
+		public static List<target_tweetBase> Select(SQLiteDataContext db)
+		{
+			return db.DbSet_target_tweet.ToList<target_tweetBase>();
 		}
 		#endregion
 		#endregion
 
 		#region INotifyPropertyChanged 
-		public event PropertyChangedEventHandler? PropertyChanged = null;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		private void NotifyPropertyChanged(String info)
 		{

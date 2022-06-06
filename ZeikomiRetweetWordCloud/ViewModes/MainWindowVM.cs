@@ -310,6 +310,8 @@ namespace ZeikomiRetweetWordCloud.ViewModes
                         var chg_value = new target_tweetBase();
                         chg_value.Copy(item);
                         chg_value.wordcloud_status = 1;
+                        chg_value.colormap = color_map;
+                        chg_value.font = System.IO.Path.GetFileNameWithoutExtension(font_path);
                         // データの更新
                         target_tweetBase.Update(item, chg_value);
                     }

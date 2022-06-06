@@ -134,7 +134,7 @@ def create_table(sqlite_path:str):
     # 2.sqliteを操作するカーソルオブジェクトを作成
     cur = conn.cursor()
 
-    cur.execute("CREATE TABLE IF NOT EXISTS target_tweet(id text primary key,text text, username text, query text, create_at text, insert_tm datetime, wordcloud_status integer default 0)")
+    cur.execute("CREATE TABLE IF NOT EXISTS target_tweet(id text primary key,text text, username text, query text, create_at text, insert_tm datetime, wordcloud_status integer default 0, font text, colormap text)")
 
     # 4.データベースの接続を切断
     cur.close()
