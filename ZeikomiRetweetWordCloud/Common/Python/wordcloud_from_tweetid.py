@@ -245,6 +245,9 @@ def get_keyword_doublequate(text:str):
         text (str): ツイート内容
     """
 
+    text = text.replace("”","\"")
+    text = text.replace("“","\"")
+
     start_index = text.find("\"")
 
     if start_index >= 0:

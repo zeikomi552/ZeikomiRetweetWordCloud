@@ -308,7 +308,7 @@ namespace ZeikomiRetweetWordCloud.ViewModes
                         if(search_key.Equals("ゴメンナサイ"))
                         {
                             // 引用ツイート
-                            QuotedTweetM.QuotedTweet(item.username, item.id, "ゴメンナサイ。うまく名詞を見つけられませんでした。\r\nキーワードを変えるかダブルクォートんで頂けると・・・", Path.Combine(work_dir, item.id + ".png"));
+                            QuotedTweetM.QuotedTweet(item.username, item.id, "ゴメンナサイ。うまく名詞を見つけられませんでした。\r\nキーワードを変えるかダブルクォートで囲んで頂けると・・・", Path.Combine(work_dir, item.id + ".png"));
                         }
                         else
                         {
